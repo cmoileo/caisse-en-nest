@@ -11,13 +11,13 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   firstName String
   lastName  String
   email     String
   password  String
   adresse   String
-  Commande  Commande[]
+  Commande  Order[]
 }
 
 model Admin {
@@ -26,7 +26,7 @@ model Admin {
   name     String
   password String
   logo     String?
-  Commande Commande[]
+  Commande Order[]
   Category Category[]
 }
 
@@ -38,7 +38,7 @@ model Product {
   ProductCategory ProductCategory[]
 }
 
-model Commande {
+model Order {
   id          Int     @id @default(autoincrement())
   name        String
   description String
