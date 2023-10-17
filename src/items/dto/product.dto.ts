@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class Product {
+export class ProductDto {
     @IsNotEmpty()
     id: number
 

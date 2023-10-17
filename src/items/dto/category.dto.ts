@@ -1,7 +1,6 @@
-import { IsNotEmpty, IsString } from "class-validator"
+import { IsNotEmpty, IsNumber, IsString } from "class-validator"
 
-export class Category {
-    @IsNotEmpty()
+export class CategoryDto {
     id: number
 
     @IsString()
@@ -14,4 +13,8 @@ export class Category {
 
     @IsNotEmpty()
     admin_id: number
+
+    @IsString()
+    @IsNotEmpty()
+    price: string
 }

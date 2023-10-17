@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Category" ALTER COLUMN "price" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Order" ALTER COLUMN "price" SET DATA TYPE TEXT;

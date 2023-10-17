@@ -30,19 +30,11 @@ model Admin {
   Category Category[]
 }
 
-model Product {
-  id              Int               @id @default(autoincrement())
-  name            String
-  description     String
-  price           Float
-  ProductCategory ProductCategory[]
-}
-
 model Order {
   id          Int     @id @default(autoincrement())
   name        String
   description String
-  price       Float
+  price       String
   isFinished  Boolean
   admin_id    Int
   user_id     Int
@@ -50,11 +42,20 @@ model Order {
   User        User    @relation(fields: [user_id], references: [id])
 }
 
+model Product {
+  id              Int               @id @default(autoincrement())
+  name            String
+  description     String
+  price           String
+  ProductCategory ProductCategory[]
+}
+
 model Category {
   id              Int               @id @default(autoincrement())
   name            String
   description     String
   admin_id        Int
+  price           String
   Admin           Admin             @relation(fields: [admin_id], references: [id])
   ProductCategory ProductCategory[]
 }
