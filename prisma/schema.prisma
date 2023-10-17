@@ -43,28 +43,20 @@ model Order {
 }
 
 model Product {
-  id              Int               @id @default(autoincrement())
-  name            String
-  description     String
-  price           String
-  ProductCategory ProductCategory[]
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  price       String
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  Int?
 }
 
 model Category {
-  id              Int               @id @default(autoincrement())
-  name            String
-  description     String
-  admin_id        Int
-  price           String
-  Admin           Admin             @relation(fields: [admin_id], references: [id])
-  ProductCategory ProductCategory[]
-}
-
-model ProductCategory {
-  productId  Int
-  categoryId Int
-  Product    Product  @relation(fields: [productId], references: [id])
-  Category   Category @relation(fields: [categoryId], references: [id])
-
-  @@id([productId, categoryId])
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  admin_id    Int
+  price       String
+  Admin       Admin     @relation(fields: [admin_id], references: [id])
+  products    Product[]
 }

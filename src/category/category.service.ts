@@ -48,6 +48,7 @@ export class categoryService {
                 id: data.id
             }
         })
+        return true
     }
     
 }
