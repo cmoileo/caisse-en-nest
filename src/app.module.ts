@@ -6,9 +6,10 @@ import { categoryModule } from './category/category.module';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { ProductModule } from './product/product.module';
+import { MenuModule } from './menu/menu.module';
 
 @Module({
-  imports: [AuthModule, categoryModule, ProductModule],
+  imports: [AuthModule, categoryModule, ProductModule, MenuModule],
   controllers: [AppController, ProductController],
   providers: [AppService, ProductService],
 })

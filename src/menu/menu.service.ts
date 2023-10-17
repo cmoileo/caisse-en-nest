@@ -1,64 +1,64 @@
 import { Injectable } from '@nestjs/common';
+import { MenuDto } from './Dto/menu.dto';
 import { PrismaClient } from '@prisma/client';
-import { ProductDto } from './dto/product.dto';
 
 @Injectable()
-export class ProductService {
+export class MenuService {
     private readonly prisma: PrismaClient;
     constructor() {
         this.prisma = new PrismaClient()
     }
 
-    async createProduct(data: ProductDto) {
+    async createMenu(data: MenuDto) {
         try {
-            const createdProduct = await this.prisma.product.create({
+            const newMenu = await this.prisma.menu.create({
                 data: {
                     name: data.name,
-                    description: data.name,
-                    price: data.name,
-                    categoryId: data.category_id,
+                    description: data.description,
+                    admin_id: data.admin_id,
+                    price: data.price,
                 }
             })
-            return createdProduct
+            return newMenu
         } catch (err) {
             return err
         }
     }
-    
-    async getProducts() {
+    async getMenu() {
         try {
-            const products = await this.prisma.product.findMany()
-            return products
+            const menus = await this.prisma.menu.findMany()
+            return menus
         } catch (err) {
             return err
         }
     }
 
-    async patchProducts(data: ProductDto) {
+    async patchMenu(data: MenuDto) {
         try {
-            const patchedProduct = await this.prisma.product.update({
+            const patchedMenu = await this.prisma.menu.update({
                 where: {
                     id: data.id
                 },
                 data: {
                     name: data.name,
                     description: data.description,
-                    price: data.description,
+                    admin_id: data.admin_id,
+                    price: data.price
                 }
             })
-            return patchedProduct
         } catch (err) {
             return err
         }
     }
 
-    async deleteProducts(data: ProductDto) {
+    async deleteMenu(data: MenuDto) {
         try {
-            const deletedProduct = this.prisma.product.delete({
+            const deleteMenu = await this.prisma.menu.delete({
                 where: {
-                    id: data.id
+                    id: data.admin_id
                 }
             })
+            return true
         } catch (err) {
             return err
         }
