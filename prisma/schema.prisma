@@ -22,9 +22,10 @@ model User {
 
 model Admin {
   id       Int        @id @default(autoincrement())
+  email    String     @unique
   name     String
   password String
-  logo     String
+  logo     String?
   Commande Commande[]
   Category Category[]
 }
