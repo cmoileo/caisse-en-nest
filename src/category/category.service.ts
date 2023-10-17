@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { CategoryDto } from './dto/category.dto';
 
 @Injectable()
-export class ItemsService {
+export class categoryService {
     private readonly prisma: PrismaClient;
     constructor() {
         this.prisma = new PrismaClient()
