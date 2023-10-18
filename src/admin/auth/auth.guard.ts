@@ -18,14 +18,11 @@ export class AuthGuard implements CanActivate {
 
         try {
             const decoded: any = await jwt.verify(token, secretKey);
-            console.log(decoded)
             const isAdmin = await this.prisma.admin.findUnique({
                 where: {
                     email: decoded.sub
                 }
             })
-
-            console.log(context.switchToHttp().getRequest().body.admin_id, isAdmin.id)
 
             if (isAdmin && context.switchToHttp().getRequest().body.admin_id == isAdmin.id) {
                 return true

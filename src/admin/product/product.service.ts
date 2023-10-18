@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { ProductDto } from './dto/product.dto';
+import { ProductCreateInput } from "../../../prisma/prisma-custom-types"
 
 @Injectable()
 export class ProductService {
@@ -9,18 +10,24 @@ export class ProductService {
         this.prisma = new PrismaClient()
     }
 
-    async createProduct(data: ProductDto) {
+    async createProduct(data: ProductDto, file: Express.Multer.File) {
         try {
             const createdProduct = await this.prisma.product.create({
                 data: {
                     name: data.name,
-                    description: data.name,
-                    price: data.name,
-                    categoryId: data.category_id,
-                }
+                    description: data.description,
+                    price: data.price,
+
+                    image: {
+                        create: {
+                            url: `/images/${file.filename}`,
+                        },
+                    },
+                } as ProductCreateInput,
             })
             return createdProduct
         } catch (err) {
+            console.log(err)
             return err
         }
     }
@@ -34,7 +41,7 @@ export class ProductService {
         }
     }
 
-    async patchProducts(data: ProductDto) {
+    async patchProducts(data: ProductDto, file: Express.Multer.File) {
         try {
             const patchedProduct = await this.prisma.product.update({
                 where: {
@@ -44,6 +51,11 @@ export class ProductService {
                     name: data.name,
                     description: data.description,
                     price: data.description,
+                    image: {
+                        update: {
+                            url: `/images/${file.filename}`,
+                        },
+                    },
                 }
             })
             return patchedProduct
