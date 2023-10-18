@@ -11,6 +11,7 @@ export class CategoryDto {
     @IsNotEmpty()
     description: string
 
+    @IsNumber()
     @IsNotEmpty()
     admin_id: number
 
