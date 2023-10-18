@@ -9,13 +9,13 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @ApiTags('admin')
-  @Post()
+  @Post('signup')
   signUp(@Body() data: SignUpDto): Promise<string> {
     return this.authService.signUp(data);
   }
 
   @ApiTags('admin')
-  @Get()
+  @Post('signin')
   signIn(@Body() data: SignInDto) {
     return this.authService.signIn(data);
   }

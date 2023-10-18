@@ -5,26 +5,15 @@ export class ProductDto {
   @ApiProperty()
   id: number;
 
-
-   @IsNotEmpty()
-    @IsString()
-    name: string
-
+    @ApiProperty()
     @IsNotEmpty()
     @IsString()
-    description: string
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  name: string;
+    name: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   description: string;
-
-  @IsNotEmpty()
-  category_id: string
   
   @ApiProperty()
   @IsString()
