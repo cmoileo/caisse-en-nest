@@ -6,7 +6,7 @@ export class ProductDto {
     @IsNotEmpty()
     @IsString()
     name: string
-    
+
     @IsNotEmpty()
     @IsString()
     description: string
@@ -15,7 +15,6 @@ export class ProductDto {
     @IsNotEmpty()
     price: string
 
-    @IsNumber()
     @IsNotEmpty()
-    category_id: number
+    category_id: string
 }
