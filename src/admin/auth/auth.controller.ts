@@ -2,18 +2,21 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/SignUp.dto';
 import { SignInDto } from './dto/SignInDto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
-    
-    @Post()
-    signUp(@Body() data:SignUpDto): Promise<string> {
-        return this.authService.signUp(data)
-    }
+  constructor(private authService: AuthService) {}
 
-    @Get()
-    signIn(@Body() data:SignInDto) {
-        return this.authService.signIn(data)
-    }
+  @ApiTags('admin')
+  @Post()
+  signUp(@Body() data: SignUpDto): Promise<string> {
+    return this.authService.signUp(data);
+  }
+
+  @ApiTags('admin')
+  @Get()
+  signIn(@Body() data: SignInDto) {
+    return this.authService.signIn(data);
+  }
 }
