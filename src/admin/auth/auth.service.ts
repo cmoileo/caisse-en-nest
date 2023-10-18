@@ -22,7 +22,7 @@ export class AuthService {
                 data: {
                     email: data.email,
                     password: hashedPassword,
-                    name: data.name
+                    name: data.name,
                 }
             })
             const payload = { sub: createAdmin.email };

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { categoryModule } from './category/category.module';
-import { ProductController } from './product/product.controller';
-import { ProductService } from './product/product.service';
-import { ProductModule } from './product/product.module';
-import { MenuModule } from './menu/menu.module';
+import { AuthModule } from './admin/auth/auth.module';
+import { categoryModule } from './admin/category/category.module';
+import { ProductController } from './admin/product/product.controller';
+import { ProductService } from './admin/product/product.service';
+import { ProductModule } from './admin/product/product.module';
+import { MenuModule } from './admin/menu/menu.module';
 
 @Module({
   imports: [AuthModule, categoryModule, ProductModule, MenuModule],

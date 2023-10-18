@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, UseGuards } from '@nestjs/common';
 import { MenuService } from './menu.service';
 import { MenuDto } from './Dto/menu.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('menu')
 export class MenuController {
     constructor(private menuService: MenuService) {}

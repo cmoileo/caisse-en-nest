@@ -56,10 +56,10 @@ model Category {
   id          Int       @id @default(autoincrement())
   name        String
   description String
-  admin_id    Int
+  admin_id    Int?
   price       String
   menu_id     Int?
-  Admin       Admin     @relation(fields: [admin_id], references: [id])
+  Admin       Admin?    @relation(fields: [admin_id], references: [id])
   menu        Menu?     @relation(fields: [menu_id], references: [id])
   products    Product[]
 }
@@ -68,8 +68,8 @@ model Menu {
   id          Int        @id @default(autoincrement())
   name        String
   description String
-  admin_id    Int
+  admin_id    Int?
   price       String
-  Admin       Admin      @relation(fields: [admin_id], references: [id])
+  Admin       Admin?     @relation(fields: [admin_id], references: [id])
   categories  Category[]
 }
