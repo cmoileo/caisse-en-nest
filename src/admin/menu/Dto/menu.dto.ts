@@ -1,20 +1,26 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class MenuDto {
-    id: number
+  @ApiProperty()
+  id: number;
 
-    @IsString()
-    @IsNotEmpty()
-    name: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
-    @IsNotEmpty()
-    admin_id: number
+  @ApiProperty()
+  @IsNotEmpty()
+  admin_id: number;
 
-    @IsString()
-    @IsNotEmpty()
-    price: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  price: string;
 }

@@ -1,28 +1,36 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class OrderDto {
-    @IsNotEmpty()
-    id: number
+  @ApiProperty()
+  @IsNotEmpty()
+  id: number;
 
-    @IsString()
-    @IsNotEmpty()
-    name: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description: string
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    price: number
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  price: number;
 
-    @IsBoolean()
-    @IsNotEmpty()
-    isFinished: boolean
+  @ApiProperty()
+  @IsBoolean()
+  @IsNotEmpty()
+  isFinished: boolean;
 
-    @IsNotEmpty()
-    admin_id: number
+  @ApiProperty()
+  @IsNotEmpty()
+  admin_id: number;
 
-    @IsNotEmpty()
-    user_id: number
+  @ApiProperty()
+  @IsNotEmpty()
+  user_id: number;
 }

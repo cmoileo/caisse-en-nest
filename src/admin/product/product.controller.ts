@@ -5,11 +5,15 @@ import { AuthGuard } from '../auth/auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import path, { extname } from 'path';
+import { ProductService } from './product.service';
+import { ProductDto } from './dto/product.dto';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 // @UseGuards(AuthGuard)
 @Controller('product')
 export class ProductController {
-    constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) {}
 
     @Post()
     @UseInterceptors(FileInterceptor('file', {
@@ -27,10 +31,17 @@ export class ProductController {
         return this.productService.createProduct(data, file);
     }
 
-    @Get()
-    getProducts() {
-        return this.productService.getProducts()
-    }
+  @ApiTags('product')
+  @Post()
+  createProduct(@Body() data: ProductDto) {
+    return this.productService.createProduct(data);
+  }
+
+  @ApiTags('product')
+  @Get()
+  getProducts() {
+    return this.productService.getProducts();
+  }
 
     @Patch()
     @UseInterceptors(FileInterceptor('file', {
@@ -47,9 +58,15 @@ export class ProductController {
     patchProduct(@Body() data:ProductDto, @UploadedFile() file: Express.Multer.File) {
         return this.productService.patchProducts(data, file)
     }
+  @ApiTags('product')
+  @Patch()
+  patchProduct(@Body() data: ProductDto) {
+    return this.productService.patchProducts(data);
+  }
 
-    @Delete()
-    deleteProduct(@Body() data:ProductDto) {
-        return this.productService.deleteProducts(data)
-    }
+  @ApiTags('product')
+  @Delete()
+  deleteProduct(@Body() data: ProductDto) {
+    return this.productService.deleteProducts(data);
+  }
 }
