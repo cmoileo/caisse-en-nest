@@ -7,7 +7,7 @@ import { diskStorage } from 'multer';
 import path, { extname } from 'path';
 import { ApiTags } from '@nestjs/swagger';
 
-// @UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}

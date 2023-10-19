@@ -17,7 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
-// @UseGuards(AuthGuard)
+@UseGuards(AuthGuard)
 @Controller('category')
 export class categoryController {
   constructor(private categoryService: categoryService) {}
