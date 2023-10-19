@@ -7,8 +7,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe())
-  app.use('/images', express.static(join(__dirname, '..', 'images')))
+  app.useGlobalPipes(new ValidationPipe());
+  app.use('/images', express.static(join(__dirname, '..', 'images')));
   const config = new DocumentBuilder()
     .setTitle('Caisse en Nest')
     .setDescription('Borne de grec')
@@ -21,7 +21,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   app.enableCors();
-  await app.listen(3000)
+  await app.listen(3000);
 }
 
-bootstrap()
+bootstrap();

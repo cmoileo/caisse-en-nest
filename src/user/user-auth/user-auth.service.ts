@@ -7,60 +7,61 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserAuthService {
-    private readonly prisma: PrismaClient
+  private readonly prisma: PrismaClient;
 
-    constructor() {
-        this.prisma = new PrismaClient()
+  constructor() {
+    this.prisma = new PrismaClient();
+  }
+
+  async createUser(data: userSignUpDto) {
+    const plainPassword = data.password;
+    const saltRounds = 10;
+
+    try {
+      const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+      console.log(hashedPassword);
+      const createdUser = await this.prisma.user.create({
+        data: {
+          email: data.email,
+          password: hashedPassword,
+          lastName: data.lastname,
+          firstName: data.firstname,
+          adresse: data.adresse,
+        },
+      });
+      const payload = { sub: createdUser.email };
+      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+      return token;
+    } catch (err) {
+      return err;
+    } finally {
+      await this.prisma.$disconnect();
     }
+  }
 
-    async createUser(data: userSignUpDto) {
-        const plainPassword = data.password
-        const saltRounds = 10
+  async login(data: userSignInDto) {
+    const plainPassword = data.password;
+    const email = data.email;
 
-        try {
-            const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-            const createdUser = await this.prisma.user.create({
-                data: {
-                    email: data.email,
-                    password: hashedPassword,
-                    lastName: data.lastname,
-                    firstName: data.firstname,
-                    adresse: data.adresse
-                }
-            })
-            const payload = { sub: createdUser.email };
-            const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-            return token
-        } catch (err) {
-            return err
-        } finally {
-            await this.prisma.$disconnect();
+    try {
+      const getUser = await this.prisma.user.findUnique({
+        where: {
+          email: email,
+        },
+      });
+
+      if (getUser) {
+        const match = await bcrypt.compare(plainPassword, getUser.password);
+
+        if (match) {
+          const payload = { sub: email };
+          const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
+          return token;
         }
+      }
+    } catch (err) {
+      return false;
     }
-
-    async login(data: userSignInDto) {
-        const plainPassword = data.password;
-        const email = data.email;
-    
-        try {
-            const getUser = await this.prisma.user.findUnique({
-                where: {
-                    email: email
-                }
-            });
-    
-            if (getUser) {
-                const match = await bcrypt.compare(plainPassword, getUser.password);
-    
-                if (match) {
-                    const payload = { sub: email };
-                    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-                    return token;
-                }
-            }
-        } catch (err) {
-            return false;
-        }
-        return false;
-    } 
+    return false;
+  }
 }

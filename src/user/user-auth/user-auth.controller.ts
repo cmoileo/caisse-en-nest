@@ -5,15 +5,17 @@ import { userSignInDto } from './dto/userSignin.dto';
 
 @Controller('user-auth')
 export class UserAuthController {
-    constructor(private authService: UserAuthService) {}
+  constructor(private authService: UserAuthService) {}
 
-    @Post('signup')
-    createUser(@Body() data: userSignUpDto) {
-        return this.authService.createUser(data)
-    }
+  @Post('signup')
+  createUser(@Body() data: userSignUpDto) {
+    console.log(data);
 
-    @Post('signin')
-    login(@Body() data: userSignInDto) {
-        return this.authService.login(data)
-    }
+    return this.authService.createUser(data);
+  }
+
+  @Post('signin')
+  login(@Body() data: userSignInDto) {
+    return this.authService.login(data);
+  }
 }

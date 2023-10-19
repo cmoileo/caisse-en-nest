@@ -11,6 +11,7 @@ export class AuthController {
   @ApiTags('admin')
   @Post('signup')
   signUp(@Body() data: SignUpDto): Promise<string> {
+    console.log(data);
     return this.authService.signUp(data);
   }
 
