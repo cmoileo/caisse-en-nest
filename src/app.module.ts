@@ -8,9 +8,10 @@ import { ProductService } from './admin/product/product.service';
 import { ProductModule } from './admin/product/product.module';
 import { MenuModule } from './admin/menu/menu.module';
 import { UserAuthModule } from './user/user-auth/user-auth.module';
+import { OrderModule } from './user/order/order.module';
 
 @Module({
-  imports: [AuthModule, categoryModule, ProductModule, MenuModule, UserAuthModule],
+  imports: [AuthModule, categoryModule, ProductModule, MenuModule, UserAuthModule, OrderModule],
   controllers: [AppController, ProductController],
   providers: [AppService, ProductService],
 })
