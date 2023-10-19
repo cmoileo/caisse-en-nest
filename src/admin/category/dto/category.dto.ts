@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CategoryDto {
   @ApiProperty()
@@ -25,6 +25,5 @@ export class CategoryDto {
   @IsNotEmpty()
   price: string;
 
-  menu_id: number
-
+  menu_id: number;
 }
