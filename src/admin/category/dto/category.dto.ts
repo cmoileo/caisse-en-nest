@@ -24,4 +24,6 @@ export class CategoryDto {
   @IsString()
   @IsNotEmpty()
   price: string;
+
+  menu_id: number
 }

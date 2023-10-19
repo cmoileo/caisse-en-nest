@@ -16,6 +16,7 @@ export class categoryService {
                 description: data.description,
                 admin_id: data.admin_id,
                 price: data.price,
+                menu_id: data.menu_id
             }
         })
         return createdCategory
