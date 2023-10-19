@@ -24,6 +24,7 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.2.7",
     "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.1.13",
     "@prisma/client": "^5.4.2",
@@ -34,7 +35,8 @@
     "jsonwebtoken": "^9.0.2",
     "prisma": "^5.4.2",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "socket.io": "^4.7.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -76,5 +78,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^6.0.3"
   }
 }

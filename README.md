@@ -16,4 +16,4 @@ Once clients has passed their orders, these are displayed on a terminal that sum
 
 # Technologies used
 
-GraphQL API built with Nest JS, PostgreSQL, Prisma
+Rest API built with Nest JS, PostgreSQL, Prisma
