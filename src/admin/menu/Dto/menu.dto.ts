@@ -23,4 +23,5 @@ export class MenuDto {
   @IsString()
   @IsNotEmpty()
   price: string;
+
 }

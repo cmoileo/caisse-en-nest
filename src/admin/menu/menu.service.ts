@@ -9,18 +9,21 @@ export class MenuService {
         this.prisma = new PrismaClient()
     }
 
-    async createMenu(data: MenuDto) {
+    async createMenu(data: MenuDto, file: Express.Multer.File) {
+        const parsedId = typeof data.admin_id === "string" ? parseInt(data.admin_id) : data.admin_id
         try {
             const newMenu = await this.prisma.menu.create({
                 data: {
                     name: data.name,
                     description: data.description,
-                    admin_id: data.admin_id,
+                    admin_id: parsedId,
                     price: data.price,
+                    imageUrl: file.path
                 }
             })
             return newMenu
         } catch (err) {
+            console.log(err)
             return err
         }
     }
@@ -34,6 +37,7 @@ export class MenuService {
     }
 
     async patchMenu(data: MenuDto) {
+        const parsedId = typeof data.admin_id === "string" ? parseInt(data.admin_id) : data.admin_id
         try {
             const patchedMenu = await this.prisma.menu.update({
                 where: {
@@ -42,7 +46,7 @@ export class MenuService {
                 data: {
                     name: data.name,
                     description: data.description,
-                    admin_id: data.admin_id,
+                    admin_id: parsedId,
                     price: data.price
                 }
             })

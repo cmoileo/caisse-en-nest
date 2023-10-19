@@ -50,8 +50,7 @@ model Product {
   price       String
   categoryId  Int?
   category    Category? @relation(fields: [categoryId], references: [id])
-  image       Image?    @relation(fields: [imageId], references: [id])
-  imageId     Int?
+  imageUrl    String
 }
 
 model Category {
@@ -64,8 +63,7 @@ model Category {
   Admin       Admin?    @relation(fields: [admin_id], references: [id])
   menu        Menu?     @relation(fields: [menu_id], references: [id])
   products    Product[]
-  imageId     Int?
-  image       Image?    @relation(fields: [imageId], references: [id])
+  imageUrl    String
 }
 
 model Menu {
@@ -76,14 +74,5 @@ model Menu {
   price       String
   Admin       Admin?     @relation(fields: [admin_id], references: [id])
   categories  Category[]
-  imageId     Int?
-  image       Image?     @relation(fields: [imageId], references: [id])
-}
-
-model Image {
-  id       Int        @id @default(autoincrement())
-  url      String
-  product  Product[]
-  category Category[]
-  menu     Menu[]
+  imageUrl    String
 }
