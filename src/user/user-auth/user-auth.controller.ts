@@ -18,4 +18,9 @@ export class UserAuthController {
   login(@Body() data: userSignInDto) {
     return this.authService.login(data);
   }
+
+  @Get()
+  getUser() {
+    return this.authService.getUser();
+  }
 }

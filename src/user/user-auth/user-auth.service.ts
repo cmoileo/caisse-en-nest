@@ -64,4 +64,8 @@ export class UserAuthService {
     }
     return false;
   }
+
+  async getUser() {
+    return '';
+  }
 }
