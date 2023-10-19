@@ -26,4 +26,5 @@ export class CategoryDto {
   price: string;
 
   menu_id: number
+
 }

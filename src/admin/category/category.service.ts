@@ -9,14 +9,17 @@ export class categoryService {
         this.prisma = new PrismaClient()
     }
 
-    async createCategory(data: CategoryDto) {
+    async createCategory(data: CategoryDto, file: Express.Multer.File) {
+        const parsedId = typeof data.admin_id === "string" ? parseInt(data.admin_id) : data.admin_id
+        const parsedMenuId = typeof data.menu_id === "string" ? parseInt(data.menu_id) : data.menu_id
         const createdCategory = await this.prisma.category.create({
             data: {
                 name: data.name,
                 description: data.description,
-                admin_id: data.admin_id,
+                admin_id: parsedId,
                 price: data.price,
-                menu_id: data.menu_id
+                menu_id: parsedMenuId,
+                imageUrl: `/images/${file.filename}`
             }
         })
         return createdCategory
@@ -27,7 +30,9 @@ export class categoryService {
         return categories
     }
 
-    async patchCategory(data: CategoryDto) {
+    async patchCategory(data: CategoryDto, file: Express.Multer.File) {
+        const parsedId = typeof data.admin_id === "string" ? parseInt(data.admin_id) : data.admin_id
+        const parsedMenuId = typeof data.menu_id === "string" ? parseInt(data.menu_id) : data.menu_id
         const updatedCategory = await this.prisma.category.update({
             where: {
                 id: data.id,
@@ -35,8 +40,10 @@ export class categoryService {
             data: {
                 name: data.name,
                 description: data.description,
-                admin_id: data.admin_id,
+                admin_id: parsedId,
                 price: data.price,
+                menu_id: parsedMenuId,
+                imageUrl: `/images/${file.filename}`
             },
         });
     

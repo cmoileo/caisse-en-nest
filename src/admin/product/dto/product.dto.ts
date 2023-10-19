@@ -24,4 +24,5 @@ export class ProductDto {
   @IsNumber()
   @IsNotEmpty()
   category_id: number;
+
 }

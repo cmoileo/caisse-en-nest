@@ -11,18 +11,15 @@ export class ProductService {
     }
 
     async createProduct(data: ProductDto, file: Express.Multer.File) {
+        const parsedCatId = typeof data.category_id === "string" ? parseInt(data.category_id) : data.category_id
         try {
             const createdProduct = await this.prisma.product.create({
                 data: {
                     name: data.name,
                     description: data.description,
                     price: data.price,
-
-                    image: {
-                        create: {
-                            url: `/images/${file.filename}`,
-                        },
-                    },
+                    categoryId: parsedCatId,
+                    imageUrl: `/images/${file.filename}`
                 } as ProductCreateInput,
             })
             return createdProduct
@@ -42,6 +39,7 @@ export class ProductService {
     }
 
     async patchProducts(data: ProductDto, file: Express.Multer.File) {
+        const parsedCatId = typeof data.category_id === "string" ? parseInt(data.category_id) : data.category_id
         try {
             const patchedProduct = await this.prisma.product.update({
                 where: {
@@ -51,11 +49,8 @@ export class ProductService {
                     name: data.name,
                     description: data.description,
                     price: data.description,
-                    image: {
-                        update: {
-                            url: `/images/${file.filename}`,
-                        },
-                    },
+                    categoryId: parsedCatId,
+                    imageUrl: `/images/${file.filename}`
                 }
             })
             return patchedProduct
