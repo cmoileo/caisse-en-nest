@@ -9,7 +9,7 @@ export class MenuService {
     this.prisma = new PrismaClient();
   }
 
-  async createMenu(data: MenuDto) {
+  async createMenu(data: MenuDto, file: Express.Multer.File): Promise<MenuDto> {
     try {
       const newMenu = await this.prisma.menu.create({
         data: {
@@ -17,6 +17,7 @@ export class MenuService {
           description: data.description,
           admin_id: data.admin_id,
           price: data.price,
+          imageUrl: file.path,
         },
       });
       return newMenu;
