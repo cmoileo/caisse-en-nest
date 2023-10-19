@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
                     email: decoded.sub
                 }
             })
-
-            if (isAdmin && context.switchToHttp().getRequest().body.admin_id == isAdmin.id) {
+            // && context.switchToHttp().getRequest().body.admin_id == isAdmin.id
+            if (isAdmin) {
                 return true
             } else {
                 return false
