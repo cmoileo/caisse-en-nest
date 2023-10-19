@@ -5,6 +5,7 @@ import {
   Get,
   Patch,
   Post,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -16,7 +17,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
-@UseGuards(AuthGuard)
+// @UseGuards(AuthGuard)
 @Controller('category')
 export class categoryController {
   constructor(private categoryService: categoryService) {}
@@ -33,7 +34,7 @@ export class categoryController {
       })
 }))
   @Post()
-  createCategory(@Body() data: CategoryDto, file: Express.Multer.File) {
+  createCategory(@Body() data: CategoryDto, @UploadedFile() file: Express.Multer.File) {
     return this.categoryService.createCategory(data, file);
   }
 
@@ -56,7 +57,7 @@ export class categoryController {
         }
       })
 }))
-  modifyCategory(@Body() data: CategoryDto, file: Express.Multer.File) {
+  modifyCategory(@Body() data: CategoryDto, @UploadedFile() file: Express.Multer.File) {
     return this.categoryService.patchCategory(data, file);
   }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { CategoryDto } from './dto/category.dto';
+import { parse } from 'path';
 
 @Injectable()
 export class categoryService {
@@ -12,6 +13,7 @@ export class categoryService {
     async createCategory(data: CategoryDto, file: Express.Multer.File) {
         const parsedId = typeof data.admin_id === "string" ? parseInt(data.admin_id) : data.admin_id
         const parsedMenuId = typeof data.menu_id === "string" ? parseInt(data.menu_id) : data.menu_id
+        console.log(file)
         const createdCategory = await this.prisma.category.create({
             data: {
                 name: data.name,

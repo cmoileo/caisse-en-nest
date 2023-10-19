@@ -18,7 +18,7 @@ export class CategoryDto {
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  admin_id: number;
+  admin_id: number | string;
 
   @ApiProperty()
   @IsString()
