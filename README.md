@@ -75,7 +75,7 @@ This section should list any major frameworks/libraries used to bootstrap your p
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Installation
+### Back-end Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
@@ -101,6 +101,21 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Front-end Installation
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/martin-ctny/Front-project-api
+   ```
+1. Install npm packages
+   ```sh
+   npm install
+   ```
+1. start the project
+   ```sh
+   npm start
+   ```
 
 <!-- USAGE EXAMPLES -->
 
