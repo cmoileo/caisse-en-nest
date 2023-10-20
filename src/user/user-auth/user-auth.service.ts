@@ -4,6 +4,7 @@ import { userSignInDto } from './dto/userSignin.dto';
 import { PrismaClient } from '@prisma/client';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import { SignUpDto } from 'src/admin/auth/dto/SignUp.dto';
 
 @Injectable()
 export class UserAuthService {
@@ -19,7 +20,6 @@ export class UserAuthService {
 
     try {
       const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-      console.log(hashedPassword);
       const createdUser = await this.prisma.user.create({
         data: {
           email: data.email,
@@ -31,7 +31,7 @@ export class UserAuthService {
       });
       const payload = { sub: createdUser.email };
       const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-      return token;
+      return {token, createdUser};
     } catch (err) {
       return err;
     } finally {
@@ -56,7 +56,7 @@ export class UserAuthService {
         if (match) {
           const payload = { sub: email };
           const token = jwt.sign(payload, process.env.JWT_SECRET_KEY);
-          return token;
+          return {token, getUser};
         }
       }
     } catch (err) {

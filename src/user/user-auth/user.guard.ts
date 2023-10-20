@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
                 }
             })
 
-            if (isUser && context.switchToHttp().getRequest().body.userId == isUser.id) {
+            if (isUser) {
                 return true
             } else {
                 return false
