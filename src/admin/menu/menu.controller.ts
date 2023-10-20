@@ -17,18 +17,17 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 
-@UseGuards(AuthGuard)
 @Controller('menu')
 export class MenuController {
   constructor(private menuService: MenuService) {}
-  
+  @UseGuards(AuthGuard)
   @Post()
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
         destination: './dist/images',
         filename: (req, file, cb) => {
-          const fileExt = extname(file.originalname); 
+          const fileExt = extname(file.originalname);
           const uniqueSuffix = Date.now();
           const newFileName = `${uniqueSuffix}${fileExt}`;
           cb(null, newFileName);
@@ -46,27 +45,30 @@ export class MenuController {
     return this.menuService.getMenu();
   }
 
-  @UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
         destination: './dist/images',
         filename: (req, file, cb) => {
-          const fileExt = extname(file.originalname); 
+          const fileExt = extname(file.originalname);
           const uniqueSuffix = Date.now();
           const newFileName = `${uniqueSuffix}${fileExt}`;
           cb(null, newFileName);
-        }
-      })
-}))
+        },
+      }),
+    }),
+  )
   @ApiTags('menu')
+  @UseGuards(AuthGuard)
   @Patch()
   patchMenu(@Body() data: MenuDto) {
     return this.menuService.patchMenu(data);
   }
 
   @ApiTags('menu')
+  @UseGuards(AuthGuard)
   @Delete()
   deleteMenu(@Body() data: MenuDto) {
     return this.menuService.deleteMenu(data);
   }
 }
-

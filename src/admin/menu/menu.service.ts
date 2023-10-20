@@ -10,12 +10,19 @@ export class MenuService {
   }
 
   async createMenu(data: MenuDto, file: Express.Multer.File): Promise<MenuDto> {
+    const parsedCatId =
+      typeof data.admin_id === 'string'
+        ? parseInt(data.admin_id)
+        : data.admin_id;
+
     try {
+      console.log(data);
+
       const newMenu = await this.prisma.menu.create({
         data: {
           name: data.name,
           description: data.description,
-          admin_id: data.admin_id,
+          admin_id: parsedCatId,
           price: data.price,
           imageUrl: file.path,
         },
@@ -44,6 +51,10 @@ export class MenuService {
 
   async patchMenu(data: MenuDto) {
     try {
+      const parsedCatId =
+        typeof data.admin_id === 'string'
+          ? parseInt(data.admin_id)
+          : data.admin_id;
       const patchedMenu = await this.prisma.menu.update({
         where: {
           id: data.id,
@@ -51,7 +62,7 @@ export class MenuService {
         data: {
           name: data.name,
           description: data.description,
-          admin_id: data.admin_id,
+          admin_id: parsedCatId,
           price: data.price,
         },
       });

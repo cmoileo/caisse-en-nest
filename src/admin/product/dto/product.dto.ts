@@ -5,16 +5,16 @@ export class ProductDto {
   @ApiProperty()
   id: number;
 
-    @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    name: string;
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
   description: string;
-  
+
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -23,6 +23,5 @@ export class ProductDto {
   @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
-  category_id: number;
-
+  categoryId: number;
 }
